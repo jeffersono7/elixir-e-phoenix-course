@@ -4,7 +4,8 @@ defmodule ExMon.Game do
   use Agent
 
   def start(computer, player) do
-    initial_value = %{computer: computer, player: player, turn: :player, status: :started}
+    turn = Enum.random([:player, :computer])
+    initial_value = %{computer: computer, player: player, turn: turn, status: :started}
 
     Agent.start_link(fn -> initial_value end, name: __MODULE__)
   end

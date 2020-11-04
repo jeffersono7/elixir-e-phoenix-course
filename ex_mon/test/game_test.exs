@@ -19,7 +19,7 @@ defmodule ExMon.GameTest do
 
       Game.start(computer, player)
 
-      expected_response = %{
+      assert %{
         computer: %Player{
           life: 100,
           moves: %{move_avg: :soco, move_heal: :cura, move_rnd: :chute},
@@ -31,10 +31,8 @@ defmodule ExMon.GameTest do
           name: "Jefferson"
         },
         status: :started,
-        turn: :player
-      }
-
-      assert expected_response == Game.info()
+        turn: _turn
+      } = Game.info()
     end
   end
 
@@ -45,7 +43,7 @@ defmodule ExMon.GameTest do
 
       Game.start(computer, player)
 
-      expected_response = %{
+      assert %{
         computer: %Player{
           life: 100,
           moves: %{move_avg: :soco, move_heal: :cura, move_rnd: :chute},
@@ -57,10 +55,8 @@ defmodule ExMon.GameTest do
           name: "Jefferson"
         },
         status: :started,
-        turn: :player
-      }
-
-      assert expected_response == Game.info()
+        turn: _turn
+      } = Game.info()
 
       new_state = %{
         computer: %Player{
@@ -92,13 +88,7 @@ defmodule ExMon.GameTest do
 
       Game.start(computer, player)
 
-      expected_response = %Player{
-        life: 100,
-        moves: %{move_avg: :soco, move_heal: :cura, move_rnd: :chute},
-        name: "Jefferson"
-      }
-
-      assert expected_response == Game.player()
+      assert %Player{life: 100, moves: _moves, name: _name} = Game.player()
 
       new_state = %{
         computer: %Player{
@@ -127,8 +117,6 @@ defmodule ExMon.GameTest do
       computer = Player.build("Robo", :chute, :soco, :cura)
 
       Game.start(computer, player)
-
-      assert :player == Game.turn()
 
       new_state = %{
         computer: %Player{

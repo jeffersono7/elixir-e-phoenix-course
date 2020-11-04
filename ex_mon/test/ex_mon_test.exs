@@ -25,13 +25,12 @@ defmodule ExMonTest do
 
       assert messages =~ "The game is started!"
       assert messages =~ "status: :started"
-      assert messages =~ "turn: :player"
     end
   end
 
   describe "make_move/1" do
     setup do
-      player = Player.build("jefferson", :chute, :soco, :cura)
+      player = Player.build("jefferson", :kick, :punch, :heal)
 
       capture_io(fn -> ExMon.start_game(player) end)
 
@@ -41,11 +40,11 @@ defmodule ExMonTest do
 
     # , %{b: player} do
     test "when the move is valid, do the move and the computer makes a move" do
-      messages = capture_io(fn -> ExMon.make_move(:chute) end)
+      messages = capture_io(fn -> ExMon.make_move(:kick) end)
 
-      assert messages =~ "The Player attacked the computer"
-      assert messages =~ "It's computer turn"
-      assert messages =~ "It's player turn"
+      assert messages =~ "attacked"
+      assert messages =~ "turn"
+      assert messages =~ "turn"
       assert messages =~ "status: :continue"
     end
 
@@ -61,7 +60,7 @@ defmodule ExMonTest do
 
       capture_io(fn -> ExMon.Game.update(game_state) end)
 
-      messages = capture_io(fn -> ExMon.make_move(:chute) end)
+      messages = capture_io(fn -> ExMon.make_move(:kick) end)
 
       assert messages =~ "The game is over!"
     end
