@@ -6,7 +6,7 @@ defmodule ExMonWeb.Controllers.TrainersControllerTest do
 
   describe "show/2" do
     setup %{conn: conn} do
-      params = %{name: "jefferson teste", password: "123456"}
+      params = %{name: "jefferson", password: "123456"}
       {:ok, trainer} = ExMon.create_trainer(params)
       {:ok, token, _claims} = encode_and_sign(trainer)
 
